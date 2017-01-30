@@ -4,6 +4,7 @@
     <groupId>org.app.myapp</groupId>
     <artifactId>myapp</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <prerequisites>
         <maven>2.2.1</maven>
     </prerequisites>
