@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My app test</title>
+    <script type="text/javascript" src="/plugins/angular.min.js"></script>
+
+    <script type="text/javascript" src="/resources/js/app.js"></script>
+    <script type="text/javascript" src="/resources/js/services/monitoringService.js"></script>
+    <script type="text/javascript" src="/resources/js/controllers/indexController.js"></script>
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+
+</head>
+<body ng-app="exampleModule">
+
+<div ng-controller="indexController">
+    <h1>Bienvenue sur l'application de visualisatoin des couvertures sattelites</h1>
+    <p>Server status: {{serverStatus}}</p>
+    <p>Application first start: {{applicationStatus.firstStart | date:'yyyy.MM.dd HH:mm:ss'}}<p>
+    <p>Application last start: {{applicationStatus.lastStart | date:'yyyy.MM.dd HH:mm:ss'}}<p>
+    <p>Application start counter: {{applicationStatus.startCounter}}<p>
+</div>
+
+<div>
+<input type="text">
+</div>
+</body>
+</html>
