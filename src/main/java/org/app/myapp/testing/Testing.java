@@ -65,10 +65,11 @@ public class Testing {
 			   lineEndProperties.setLen(STLineEndLength.LG);
 			   lineEndProperties.setW(STLineEndWidth.LG);
 
-			   lineProperties.setTailEnd(lineEndProperties);
+			   lineProperties.setHeadEnd(lineEndProperties);
 
 			   FileOutputStream fileOut = new FileOutputStream("workbook.xlsx");
 			   wb.write(fileOut);
+			   System.out.println("workbook.xlsx généré");
 
 			  } catch (IOException ioex) {
 			  }
