@@ -113,6 +113,7 @@ public class CreateTable {
         File f = new File("test.xlsx");
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet();
+        XSSFTable table = sheet.createTable();
         XSSFRow row = sheet.createRow(0);
         XSSFCell cell = row.createCell(0);
         cell.setCellValue("no blue");
