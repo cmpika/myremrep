@@ -12,11 +12,18 @@ import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.ShapeTypes;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.TextAutofit;
+import org.apache.poi.xssf.usermodel.XSSFChildAnchor;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.xssf.usermodel.XSSFShapeGroup;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFSimpleShape;
+import org.apache.poi.xssf.usermodel.XSSFTextBox;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTLineEndProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.CTLineProperties;
@@ -24,6 +31,9 @@ import org.openxmlformats.schemas.drawingml.x2006.main.CTShapeProperties;
 import org.openxmlformats.schemas.drawingml.x2006.main.STLineEndLength;
 import org.openxmlformats.schemas.drawingml.x2006.main.STLineEndType;
 import org.openxmlformats.schemas.drawingml.x2006.main.STLineEndWidth;
+import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType;
+import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType;
+import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType.Enum; 
 
 /**
  * @author cmpika
@@ -63,16 +73,20 @@ public class Testing {
 			   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("PJEL_DEMANDE");
 				simpleShape.setShapeType(ShapeTypes.RECT);
 				simpleShape.setTextAutofit(TextAutofit.NORMAL);
-				simpleShape.setText("toto");
+				
+				simpleShape.setText(new XSSFRichTextString("ZT1"));
+//				simpleShape.setText("ZT1");
 				simpleShape.setLineWidth(3);
-				simpleShape.setFillColor(Color.YELLOW.getRed(),
-						Color.YELLOW.getGreen(),
-						Color.YELLOW.getBlue());
+				simpleShape.setFillColor(Color.CYAN.getRed(),
+						Color.CYAN.getGreen(),
+						Color.CYAN.getBlue());
 				simpleShape.setTopInset(0);
 				simpleShape.setLineStyleColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
+				simpleShape.setVerticalAlignment(VerticalAlignment.CENTER);
+//				simpleShape.setTextAutofit(TextAutofit.NONE);
+//				 simpleShape.getCTShape().getTxBody().getPArray(0).getPPr().setAlgn(STTextAlignType.CTR);
+//				System.out.println(simpleShape.getCTShape().getTxBody().getPArray(0).getPPr());
 				
-			   
-			   
 			   
 
 			   ClientAnchor anchor = helper.createClientAnchor();
@@ -108,5 +122,8 @@ public class Testing {
 			  }
 
 	}
+	
+	
+	
 
 }
