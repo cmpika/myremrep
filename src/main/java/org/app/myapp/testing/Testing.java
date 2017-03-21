@@ -14,12 +14,14 @@ import org.apache.poi.ss.usermodel.ShapeTypes;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.Units;
 import org.apache.poi.xssf.usermodel.TextAutofit;
 import org.apache.poi.xssf.usermodel.XSSFChildAnchor;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import org.apache.poi.xssf.usermodel.XSSFDrawing;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRichTextString;
+import org.apache.poi.xssf.usermodel.XSSFShape;
 import org.apache.poi.xssf.usermodel.XSSFShapeGroup;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFSimpleShape;
@@ -59,18 +61,25 @@ public class Testing {
 			   
 			   
 			   final XSSFClientAnchor anc = new XSSFClientAnchor();
-			   anc.setCol1(3);
-			   anc.setDx1(1);
+			
+	
+			   anc.setCol1(6);
+			   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
+			   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
+			
+			   System.out.println("dx1=" +anc.getDx1() + " dy1="+anc.getDy1() +" dx2="+anc.getDx2() +" dy2="+anc.getDy2());
 				
-			   anc.setDx2(6);
-			   anc.setCol2(7);
+//			   float newWidthPixel = widthPixel * pourcentage;
+//				anc.setDx1(Float.valueOf(newWidthPixel * XSSFShape.EMU_PER_PIXEL).intValue());
+			 
+			   anc.setCol2(8);
 			   
-			   anc.setRow1(1);
-			   anc.setRow2(1 + 2);
+			   anc.setRow1(10);
+			   anc.setRow2(13);
 			   
 			   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
 			   
-			   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("PJEL_DEMANDE");
+			   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("ZONE DE TRAVAUX 1");
 				simpleShape.setShapeType(ShapeTypes.RECT);
 				simpleShape.setTextAutofit(TextAutofit.NORMAL);
 				
@@ -89,30 +98,33 @@ public class Testing {
 				
 			   
 
-			   ClientAnchor anchor = helper.createClientAnchor();
-			   anchor.setCol1(2);
-			   anchor.setRow1(2); 
-			   anchor.setCol2(5);
-			   anchor.setRow2(5); 
-
-			   XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
-			   shape.setShapeType(ShapeTypes.LINE);
-			   shape.setLineWidth(1.5);
-			   shape.setLineStyle(3);
-			   shape.setLineStyleColor(0,0,255);
-
-			//apache POI sets first shape Id to 1. It should be 0.
-			shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
-
-			   CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
-			   CTLineProperties lineProperties = shapeProperties.getLn();
-
-			   CTLineEndProperties lineEndProperties = org.openxmlformats.schemas.drawingml.x2006.main.CTLineEndProperties.Factory.newInstance();
-			   lineEndProperties.setType(STLineEndType.TRIANGLE);
-			   lineEndProperties.setLen(STLineEndLength.LG);
-			   lineEndProperties.setW(STLineEndWidth.LG);
-
-			   lineProperties.setHeadEnd(lineEndProperties);
+//			   ClientAnchor anchor = helper.createClientAnchor();
+//			   anchor.setCol1(2);
+//			   anchor.setRow1(2); 
+//			   anchor.setCol2(5);
+//			   anchor.setRow2(5); 
+//
+//			   XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
+//			   shape.setShapeType(ShapeTypes.LINE);
+//			   shape.setLineWidth(1.5);
+//			   shape.setLineStyle(3);
+//			   shape.setLineStyleColor(0,0,255);
+//
+//			//apache POI sets first shape Id to 1. It should be 0.
+//			shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
+//
+//			   CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
+//			   CTLineProperties lineProperties = shapeProperties.getLn();
+//
+//			   CTLineEndProperties lineEndProperties = org.openxmlformats.schemas.drawingml.x2006.main.CTLineEndProperties.Factory.newInstance();
+//			   lineEndProperties.setType(STLineEndType.TRIANGLE);
+//			   lineEndProperties.setLen(STLineEndLength.LG);
+//			   lineEndProperties.setW(STLineEndWidth.LG);
+//
+//			   lineProperties.setHeadEnd(lineEndProperties);
+				int a = 131, b=200;
+				int c = (300-131)/100;
+				System.out.println(c);
 
 			   FileOutputStream fileOut = new FileOutputStream("workbook.xlsx");
 			   wb.write(fileOut);

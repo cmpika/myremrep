@@ -25,15 +25,15 @@ import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType.Enum;
 	        XSSFWorkbook wb = new XSSFWorkbook();
 	        XSSFSheet sht = wb.createSheet();
 	        File file = new File(fileName);
-	        int colStart = 1;
-//	        int colStart = 5;
+//	        int colStart = 1;
+	        int colStart = 5;
 
 	        XSSFDrawing draw = sht.createDrawingPatriarch();
 
 	        XSSFShapeGroup group = draw.createGroup(draw.createAnchor(0, 0, 0, 0, colStart, 11, colStart + 6, 11+7));
 	        group.setCoordinates(colStart, 11, colStart + 6, 11+7);
 
-	        XSSFTextBox tb1 = group.createTextbox(new XSSFChildAnchor(0, 0, 9, 20));
+	        XSSFTextBox tb1 = group.createTextbox(new XSSFChildAnchor(5, 0, 9, 10));
 	        tb1.setLineStyleColor(0, 0, 0);
 	        tb1.setLineWidth(2);
 	        Color col = Color.cyan;
@@ -42,7 +42,6 @@ import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType.Enum;
 	        XSSFRichTextString address = new XSSFRichTextString("TextBox string 1\nHas three\nLines to it");
 	        tb1.setText(address);    
 	        tb1.setVerticalAlignment(VerticalAlignment.CENTER);
-	      tb1.getCTShape().getTxBody().getPArray(0).getPPr().setAlgn(STTextAlignType.L);
 	        
 	        CTTextCharacterProperties rpr = tb1.getCTShape().getTxBody().getPArray(0).getRArray(0).getRPr();
 	        rpr.addNewLatin().setTypeface("Trebuchet MS");
@@ -53,9 +52,6 @@ import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType.Enum;
 	        FileOutputStream fout = new FileOutputStream(file);
 	        wb.write(fout);
 	        fout.close();
-	        
-	        
-	        
 	    }
 	}
 
