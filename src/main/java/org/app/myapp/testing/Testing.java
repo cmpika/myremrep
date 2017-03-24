@@ -46,57 +46,55 @@ public class Testing {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		 try {
+	public static void main(String[] args) throws IOException {
+		 Workbook wb = new XSSFWorkbook();
 
-			   Workbook wb = new XSSFWorkbook();
+		   Sheet sheet = wb.createSheet("Sheet1");
 
-			   Sheet sheet = wb.createSheet("Sheet1");
+		   CreationHelper helper = wb.getCreationHelper();
+		   Drawing drawing = sheet.createDrawingPatriarch();
+		   
+		   
+		   
+		   
+		   
+		   final XSSFClientAnchor anc = new XSSFClientAnchor();
+		
 
-			   CreationHelper helper = wb.getCreationHelper();
-			   Drawing drawing = sheet.createDrawingPatriarch();
-			   
-			   
-			   
-			   
-			   
-			   final XSSFClientAnchor anc = new XSSFClientAnchor();
+		   anc.setCol1(6);
+		   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
+		   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
+		
+//			   System.out.println("dx1=" +anc.getDx1() + " dy1="+anc.getDy1() +" dx2="+anc.getDx2() +" dy2="+anc.getDy2());
 			
-	
-			   anc.setCol1(6);
-			   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
-			   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
-			
-			   System.out.println("dx1=" +anc.getDx1() + " dy1="+anc.getDy1() +" dx2="+anc.getDx2() +" dy2="+anc.getDy2());
-				
 //			   float newWidthPixel = widthPixel * pourcentage;
 //				anc.setDx1(Float.valueOf(newWidthPixel * XSSFShape.EMU_PER_PIXEL).intValue());
-			 
-			   anc.setCol2(8);
-			   
-			   anc.setRow1(10);
-			   anc.setRow2(13);
-			   
-			   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
-			   
-			   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("ZONE DE TRAVAUX 1");
-				simpleShape.setShapeType(ShapeTypes.RECT);
-				simpleShape.setTextAutofit(TextAutofit.NORMAL);
-				
-				simpleShape.setText(new XSSFRichTextString("ZT1"));
+		 
+		   anc.setCol2(8);
+		   
+		   anc.setRow1(10);
+		   anc.setRow2(13);
+		   
+		   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
+		   
+		   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("ZONE DE TRAVAUX 1");
+			simpleShape.setShapeType(ShapeTypes.RECT);
+			simpleShape.setTextAutofit(TextAutofit.NORMAL);
+			
+			simpleShape.setText(new XSSFRichTextString("ZT1"));
 //				simpleShape.setText("ZT1");
-				simpleShape.setLineWidth(3);
-				simpleShape.setFillColor(Color.CYAN.getRed(),
-						Color.CYAN.getGreen(),
-						Color.CYAN.getBlue());
-				simpleShape.setTopInset(0);
-				simpleShape.setLineStyleColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
-				simpleShape.setVerticalAlignment(VerticalAlignment.CENTER);
+			simpleShape.setLineWidth(3);
+			simpleShape.setFillColor(Color.CYAN.getRed(),
+					Color.CYAN.getGreen(),
+					Color.CYAN.getBlue());
+			simpleShape.setTopInset(0);
+			simpleShape.setLineStyleColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
+			simpleShape.setVerticalAlignment(VerticalAlignment.CENTER);
 //				simpleShape.setTextAutofit(TextAutofit.NONE);
 //				 simpleShape.getCTShape().getTxBody().getPArray(0).getPPr().setAlgn(STTextAlignType.CTR);
 //				System.out.println(simpleShape.getCTShape().getTxBody().getPArray(0).getPPr());
-				
-			   
+			
+		   
 
 //			   ClientAnchor anchor = helper.createClientAnchor();
 //			   anchor.setCol1(2);
@@ -122,18 +120,15 @@ public class Testing {
 //			   lineEndProperties.setW(STLineEndWidth.LG);
 //
 //			   lineProperties.setHeadEnd(lineEndProperties);
-				int a = 131, b=200;
-				int c = (300-131)/100;
-				System.out.println(c);
-
-			   FileOutputStream fileOut = new FileOutputStream("workbook.xlsx");
-			   wb.write(fileOut);
-			   System.out.println("workbook.xlsx généré");
-
-			  } catch (IOException ioex) {
-			  }
-
+			double a = ((double)(((690 -686)*1000) + 0 - 131)/100) + 11 + (double)150/100;
+			double temp = ((double) 150) / 100;
+			int c = (300-131)/100;
+			int b = (int)a;
+			System.out.println(b);
 	}
+
+
+
 	
 	
 	
