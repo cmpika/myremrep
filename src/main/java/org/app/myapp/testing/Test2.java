@@ -17,7 +17,7 @@ import org.apache.poi.xssf.usermodel.*;
 import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType;
 import org.openxmlformats.schemas.drawingml.x2006.main.STTextAlignType.Enum; 
 
-	public class test2 {
+	public class Test2 {
 
 	    static String fileName = "TestWorkbook.xlsx";
 
