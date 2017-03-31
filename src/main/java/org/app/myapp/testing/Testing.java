@@ -49,12 +49,39 @@ public class Testing {
 		   
 		   
 		   
+		   ClientAnchor anchor = helper.createClientAnchor();
+		   anchor.setCol1(2);
+		   anchor.setRow1(2); 
+		   anchor.setCol2(5);
+		   anchor.setRow2(5); 
+
+		   XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
+		   shape.setShapeType(ShapeTypes.LINE);
+		   shape.setLineWidth(1.5);
+		   shape.setLineStyle(3);
+		   shape.setLineStyleColor(0,0,255);
+
+		//apache POI sets first shape Id to 1. It should be 0.
+//		  shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
+
+		   CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
+		   CTLineProperties lineProperties = shapeProperties.getLn();
+
+		   CTLineEndProperties lineEndProperties = org.openxmlformats.schemas.drawingml.x2006.main.CTLineEndProperties.Factory.newInstance();
+		   lineEndProperties.setType(STLineEndType.TRIANGLE);
+		   lineEndProperties.setLen(STLineEndLength.LG);
+		   lineEndProperties.setW(STLineEndWidth.LG);
+
+		   lineProperties.setTailEnd(lineEndProperties);
+		   
+		   
+		   
 		   
 		   
 		   final XSSFClientAnchor anc = new XSSFClientAnchor();
 		
 
-		   anc.setCol1(6);
+		   anc.setCol1(3);
 		   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
 		   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
 		
@@ -63,10 +90,10 @@ public class Testing {
 //			   float newWidthPixel = widthPixel * pourcentage;
 //				anc.setDx1(Float.valueOf(newWidthPixel * XSSFShape.EMU_PER_PIXEL).intValue());
 		 
-		   anc.setCol2(8);
+		   anc.setCol2(4);
 		   
-		   anc.setRow1(10);
-		   anc.setRow2(13);
+		   anc.setRow1(3);
+		   anc.setRow2(4);
 		   
 		   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
 		   
@@ -89,30 +116,7 @@ public class Testing {
 			
 		   
 
-			   ClientAnchor anchor = helper.createClientAnchor();
-			   anchor.setCol1(2);
-			   anchor.setRow1(2); 
-			   anchor.setCol2(5);
-			   anchor.setRow2(5); 
-
-			   XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
-			   shape.setShapeType(ShapeTypes.LINE);
-			   shape.setLineWidth(1.5);
-			   shape.setLineStyle(3);
-			   shape.setLineStyleColor(0,0,255);
-
-			//apache POI sets first shape Id to 1. It should be 0.
-			  shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-2);
-
-			   CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
-			   CTLineProperties lineProperties = shapeProperties.getLn();
-
-			   CTLineEndProperties lineEndProperties = org.openxmlformats.schemas.drawingml.x2006.main.CTLineEndProperties.Factory.newInstance();
-			   lineEndProperties.setType(STLineEndType.TRIANGLE);
-			   lineEndProperties.setLen(STLineEndLength.LG);
-			   lineEndProperties.setW(STLineEndWidth.LG);
-
-			   lineProperties.setHeadEnd(lineEndProperties);
+			 
 //			double a = ((double)(((690 -686)*1000) + 0 - 131)/100) + 11 + (double)150/100;
 //			double temp = ((double) 150) / 100;
 //			int c = (300-131)/100;
@@ -124,7 +128,7 @@ public class Testing {
 			
 try{
 			   Date  dt = new Date();
-			   SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+			   SimpleDateFormat sdf = new SimpleDateFormat("MMddHHmmss");
 			   String fname  = "workbook"+ (sdf.format(dt)).toString().replaceAll(":", "_")+".xlsx";
 			   
 			   FileOutputStream fileOut = new FileOutputStream(fname);
