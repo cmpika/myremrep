@@ -9,9 +9,16 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFPatriarch;
+import org.apache.poi.hssf.usermodel.HSSFShape;
+import org.apache.poi.hssf.usermodel.HSSFSimpleShape;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.ShapeTypes;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
@@ -47,22 +54,27 @@ public class Testing {
 		   CreationHelper helper = wb.getCreationHelper();
 		   Drawing drawing = sheet.createDrawingPatriarch();
 		   
+//		   
+//		   
+////		   ClientAnchor anchor = helper.createClientAnchor();
+////		   anchor.setCol1(2);
+////		   anchor.setRow1(2); 
+////		   anchor.setCol2(5);
+////		   anchor.setRow2(5); 
+//		   
 		   
+		   XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0, 0, 0, 0, 21,1, 20);
 		   
-		   ClientAnchor anchor = helper.createClientAnchor();
-		   anchor.setCol1(2);
-		   anchor.setRow1(2); 
-		   anchor.setCol2(5);
-		   anchor.setRow2(5); 
+		   System.out.println(anchor);
 
 		   XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
 		   shape.setShapeType(ShapeTypes.LINE);
 		   shape.setLineWidth(1.5);
 		   shape.setLineStyle(3);
 		   shape.setLineStyleColor(0,0,255);
-
-		//apache POI sets first shape Id to 1. It should be 0.
-//		  shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
+//
+//		//apache POI sets first shape Id to 1. It should be 0.
+////		  shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
 
 		   CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
 		   CTLineProperties lineProperties = shapeProperties.getLn();
@@ -77,42 +89,85 @@ public class Testing {
 		   
 		   
 		   
-		   
-		   final XSSFClientAnchor anc = new XSSFClientAnchor();
-		
-
-		   anc.setCol1(3);
-		   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
-		   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
-		
-//			   System.out.println("dx1=" +anc.getDx1() + " dy1="+anc.getDy1() +" dx2="+anc.getDx2() +" dy2="+anc.getDy2());
-			
-//			   float newWidthPixel = widthPixel * pourcentage;
-//				anc.setDx1(Float.valueOf(newWidthPixel * XSSFShape.EMU_PER_PIXEL).intValue());
+//		   
+//		   final XSSFClientAnchor anc = new XSSFClientAnchor();
+//		
+//
+//		   anc.setCol1(3);
+//		   anc.setDy1(1*XSSFShape.EMU_PER_PIXEL);
+//		   anc.setDx1(30*XSSFShape.EMU_PER_PIXEL);
+//		
+////			   System.out.println("dx1=" +anc.getDx1() + " dy1="+anc.getDy1() +" dx2="+anc.getDx2() +" dy2="+anc.getDy2());
+//			
+////			   float newWidthPixel = widthPixel * pourcentage;
+////				anc.setDx1(Float.valueOf(newWidthPixel * XSSFShape.EMU_PER_PIXEL).intValue());
 		 
-		   anc.setCol2(4);
-		   
-		   anc.setRow1(3);
-		   anc.setRow2(4);
-		   
-		   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
-		   
-		   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("ZONE DE TRAVAUX 1");
-			simpleShape.setShapeType(ShapeTypes.RECT);
-			simpleShape.setTextAutofit(TextAutofit.NORMAL);
-			
-			simpleShape.setText(new XSSFRichTextString("ZT1"));
-//				simpleShape.setText("ZT1");
-			simpleShape.setLineWidth(3);
-			simpleShape.setFillColor(Color.CYAN.getRed(),
-					Color.CYAN.getGreen(),
-					Color.CYAN.getBlue());
-			simpleShape.setTopInset(0);
-			simpleShape.setLineStyleColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
-			simpleShape.setVerticalAlignment(VerticalAlignment.CENTER);
+//		   anc.setCol2(4);
+//		   
+//		   anc.setRow1(3);
+//		   anc.setRow2(4);
+//		   
+//		   final XSSFSimpleShape simpleShape = ((XSSFDrawing) drawing).createSimpleShape(anc);
+//		   
+//		   simpleShape.getCTShape().getNvSpPr().getCNvPr().setName("ZONE DE TRAVAUX 1");
+//			simpleShape.setShapeType(ShapeTypes.RECT);
+//			simpleShape.setTextAutofit(TextAutofit.NORMAL);
+//			
+//			simpleShape.setText(new XSSFRichTextString("ZT1"));
+////				simpleShape.setText("ZT1");
+//			simpleShape.setLineWidth(3);
+//			simpleShape.setFillColor(Color.CYAN.getRed(),
+//					Color.CYAN.getGreen(),
+//					Color.CYAN.getBlue());
+//			simpleShape.setTopInset(0);
+//			simpleShape.setLineStyleColor(Color.BLACK.getRed(), Color.BLACK.getGreen(), Color.BLACK.getBlue());
+//			simpleShape.setVerticalAlignment(VerticalAlignment.CENTER);
 //				simpleShape.setTextAutofit(TextAutofit.NONE);
 //				 simpleShape.getCTShape().getTxBody().getPArray(0).getPPr().setAlgn(STTextAlignType.CTR);
 //				System.out.println(simpleShape.getCTShape().getTxBody().getPArray(0).getPPr());
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			 Workbook wb = new HSSFWorkbook();
+//			 Sheet sheet = wb.createSheet();
+//			 HSSFPatriarch patriarch = (HSSFPatriarch) sheet.createDrawingPatriarch();
+//	
+//			 /* Here is the thing: the line will go from top left in cell (0,0) to down left 
+//			 of cell (0,1) */
+//			 HSSFClientAnchor anchor = new HSSFClientAnchor(
+//			   0, 0, 0, 0, (short) 2, 0,(short) 0, 20);
+//	
+//			 HSSFSimpleShape shape = patriarch.createSimpleShape(anchor);
+//			 shape.setShapeType(HSSFSimpleShape.OBJECT_TYPE_LINE);
+//			 shape.setLineStyleColor(10, 10, 10);
+//			 shape.setFillColor(90, 10, 200);
+//			 shape.setLineWidth(HSSFShape.LINEWIDTH_ONE_PT);
+//			 shape.setLineStyle(HSSFShape.LINESTYLE_SOLID);
+//	
+//			 // you don't even need the cell, but if you also want to write anything...
+//			 Row row = sheet.createRow(0);
+//			 Cell cell = row.createCell(0);
+//			 cell.setCellValue("Test"); 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		   
 
@@ -134,6 +189,7 @@ try{
 			   FileOutputStream fileOut = new FileOutputStream(fname);
 			   wb.write(fileOut);
 			   System.out.println(fname + " généré");
+			   wb.close();
 
 			  } catch (IOException ioex) {
 			  }
