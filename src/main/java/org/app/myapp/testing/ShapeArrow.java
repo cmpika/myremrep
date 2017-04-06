@@ -32,16 +32,16 @@ class ShapeArrow {
 //   anchor.setCol2(0);
 //   anchor.setRow2(5); 
 
-   XSSFClientAnchor anchor = new XSSFClientAnchor(19050, 28575, 9525, 0, 0, 0, 3, 6);
+   XSSFClientAnchor anchor = new XSSFClientAnchor(0, 0, 0, 0, 0, 0, 3, 6);
    XSSFSimpleShape shape = ((XSSFDrawing)drawing).createSimpleShape((XSSFClientAnchor)anchor);
    shape.setShapeType(ShapeTypes.LINE);
    shape.setLineWidth(1.5);
    shape.setLineStyle(3);
    shape.setLineStyleColor(0,0,255);
    
- //apache POI sets first shape Id to 1. It should be 0.
-   shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
-
+	 //apache POI sets first shape Id to 1. It should be 0.
+	   shape.getCTShape().getNvSpPr().getCNvPr().setId(shape.getCTShape().getNvSpPr().getCNvPr().getId()-1);
+	   shape.getCTShape().getSpPr().getXfrm().setFlipV(true);
       CTShapeProperties shapeProperties = shape.getCTShape().getSpPr();
       CTLineProperties lineProperties = shapeProperties.getLn();
 
@@ -49,8 +49,9 @@ class ShapeArrow {
       lineEndProperties.setType(STLineEndType.TRIANGLE);
       lineEndProperties.setLen(STLineEndLength.LG);
       lineEndProperties.setW(STLineEndWidth.LG);
+      
 
-//      lineProperties.setHeadEnd(lineEndProperties);
+      lineProperties.setHeadEnd(lineEndProperties);
       SimpleDateFormat sp = new SimpleDateFormat("yy_MM_dd_HH_mm_SSS");
       Date dt = new Date();
 
